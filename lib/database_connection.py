@@ -1,6 +1,7 @@
 import os, psycopg
 from flask import g
 from psycopg.rows import dict_row
+from dotenv import load_dotenv
 
 
 # This class helps us interact with the database.
@@ -15,6 +16,9 @@ class DatabaseConnection:
 
     def __init__(self, test_mode=False):
         self.test_mode = test_mode
+        load_dotenv()
+        self.username = os.getenv("DB_USERNAME")
+        self.password = os.getenv("DB_PASSWORD")
 
     # This method connects to PostgreSQL using the psycopg library. We connect
     # to localhost and select the database name given in argument.

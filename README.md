@@ -8,8 +8,8 @@ parts of the project work, or you can delete it and start from scratch.
 
 There are two videos to support:
 
-* [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
-* [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s)
+- [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
+- [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s)
 
 ## Setup
 
@@ -27,7 +27,7 @@ There are two videos to support:
 ; python -m venv html-application-starter-venv
 
 # Activate the virtual environment
-; source html-application-starter-venv/bin/activate 
+; .\venv-name\Scripts\activate
 
 # Install dependencies
 (html-application-starter-venv); pip install -r requirements.txt
@@ -36,6 +36,10 @@ There are two videos to support:
 # Create a test and development database
 (html-application-starter-venv); createdb YOUR_PROJECT_NAME
 (html-application-starter-venv); createdb YOUR_PROJECT_NAME_test
+
+# add .env
+DB_USERNAME="postgres"
+DB_PASSWORD="<your password"
 
 # Open lib/database_connection.py and change the database name to YOUR_PROJECT_NAME
 (html-application-starter-venv); open lib/database_connection.py
@@ -56,7 +60,6 @@ If you would like to remove the example code:
 ```shell
 ; ./remove_example_code.sh
 ```
-
 
 <!-- BEGIN GENERATED SECTION DO NOT EDIT -->
 
