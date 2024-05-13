@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 # That's why we have provided it!
 class DatabaseConnection:
     # VVV CHANGE BOTH OF THESE VVV
-    DEV_DATABASE_NAME = "DEFAULT_MAKERS_PROJECT"
-    TEST_DATABASE_NAME = "DEFAULT_MAKERS_PROJECT_TEST"
+    DEV_DATABASE_NAME = "Webpage_Exercise"
+    TEST_DATABASE_NAME = "Webpage_Exercise_Test"
 
     def __init__(self, test_mode=False):
         self.test_mode = test_mode
@@ -26,6 +26,8 @@ class DatabaseConnection:
         try:
             self.connection = psycopg.connect(
                 f"postgresql://localhost/{self._database_name()}",
+                user=self.username,
+                password=self.password,
                 row_factory=dict_row)
         except psycopg.OperationalError:
             raise Exception(f"Couldn't connect to the database {self._database_name()}! " \
