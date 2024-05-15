@@ -1,15 +1,4 @@
-# Flask HTML Web & Database Project Starter
-
-This is a starter project for you to use to start your Flask HTML web & database
-projects.
-
-It contains quite a lot of example code. You can use this to see how the various
-parts of the project work, or you can delete it and start from scratch.
-
-There are two videos to support:
-
-- [A demonstration of setting up the project](https://www.youtube.com/watch?v=YStsRfMVx44&t=0s)
-- [A walkthrough of the project codebase](https://www.youtube.com/watch?v=YStsRfMVx44&t=314s)
+# My Chitter project 
 
 ## Setup
 
