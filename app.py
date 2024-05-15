@@ -1,42 +1,65 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from lib.database_connection import get_flask_database_connection
-
+from lib.user_repository import UserRepository
+from lib.user import User
 # Create a new Flask app
 app = Flask(__name__)
 
-# == Your Routes Here ==
+
+@app.route('/')
+def get_index():
+    return render_template('chitter/index.html')
+
+@app.route('/sign-up')
+def get_signup():
+    return render_template('chitter/sign-up.html')
+
+@app.route('/home')
+def home():
+    return render_template('chitter/home.html')
+
+@app.route('/sign-up', methods=['POST'])
+def post_artist():
+    if has_invalid_user_parameters(request.form):
+        return "You need to submit a name, username, email and password", 400
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    user = User(
+                None,
+                request.form["name"],
+                request.form["username"],
+                request.form["email"],
+                request.form["password"])
+    repository.create(user)
+    return redirect(f"/")
+
+def has_invalid_user_parameters(form):
+    return 'name' not in request.form or 'username' not in request.form or 'email' not in request.form or 'password' not in request.form 
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    if not email or not password:
+        return "Email and password are required", 400
+
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+
+    user = repository.get_by_email(email)
+
+    if user and user.password == password:
+        # Login successful, redirect user to a dashboard or profile page
+        return redirect('/home')
+    else:
+        # Login failed, return an error message
+        return "Invalid email or password", 401
 
 
-# == Example Code Below ==
 
-# GET /emoji
-# Returns a smiley face in HTML
-# Try it:
-#   ; open http://localhost:5001/emoji
-@app.route('/emoji', methods=['GET'])
-def get_emoji():
-    # We use `render_template` to send the user the file `emoji.html`
-    # But first, it gets processed to look for placeholders like {{ emoji }}
-    # These placeholders are replaced with the values we pass in as arguments
-    return render_template('emoji.html', emoji=':)')
 
-@app.route('/goodbye', methods=['GET'])
-def get_goodbye():
-    # We use `render_template` to send the user the file `emoji.html`
-    # But first, it gets processed to look for placeholders like {{ emoji }}
-    # These placeholders are replaced with the values we pass in as arguments
-    return render_template('goodbye.html')
 
-# This imports some more example routes for you to see how they work
-# You can delete these lines if you don't need them.
-from example_routes import apply_example_routes
-apply_example_routes(app)
-
-# == End Example Code ==
-
-# These lines start the server if you run this file directly
-# They also start the server configured to use the test database
-# if started in test mode.
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5001)))

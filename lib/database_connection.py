@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 # That's why we have provided it!
 class DatabaseConnection:
     # VVV CHANGE BOTH OF THESE VVV
-    DEV_DATABASE_NAME = "Webpage_Exercise"
-    TEST_DATABASE_NAME = "Webpage_Exercise_Test"
+    DEV_DATABASE_NAME = "Chitter"
+    TEST_DATABASE_NAME = "Chitter_Test"
 
     def __init__(self, test_mode=False):
         self.test_mode = test_mode
