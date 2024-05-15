@@ -44,10 +44,4 @@ DB_PASSWORD="<your password"
 # Now visit http://localhost:5001/emoji in your browser
 ```
 
-If you would like to remove the example code:
-
-```shell
-; ./remove_example_code.sh
-```
-
 
