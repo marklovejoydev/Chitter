@@ -25,6 +25,11 @@ def post_artist():
         return "You need to submit a name, username, email and password", 400
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
+    
+    existing_user = repository.get_by_email(request.form["email"])
+    if existing_user:
+        return "Email is already in use", 400
+    
     user = User(
                 None,
                 request.form["name"],
