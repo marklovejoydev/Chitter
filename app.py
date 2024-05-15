@@ -1,4 +1,5 @@
 import os
+import re
 from flask import Flask, request, render_template, redirect
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
@@ -29,6 +30,10 @@ def post_artist():
     existing_user = repository.get_by_email(request.form["email"])
     if existing_user:
         return "Email is already in use", 400
+    
+    password = request.form["password"]
+    if not is_valid_password(password):
+        return "Password must have at least 1 capital letter, 1 number, and be greater than 4 in length", 400
     
     user = User(
                 None,
@@ -63,7 +68,15 @@ def login():
         return "Invalid email or password", 401
 
 
-
+def is_valid_password(password):
+    # Password must have at least 1 capital letter, 1 number, and be greater than 4 in length
+    if len(password) < 5:
+        return False
+    if not re.search("[A-Z]", password):
+        return False
+    if not re.search("[0-9]", password):
+        return False
+    return True
 
 
 if __name__ == '__main__':

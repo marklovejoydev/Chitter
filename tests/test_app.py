@@ -36,3 +36,16 @@ def test_user_can_not_create_account_and_log_in_email_in_use(db_connection, page
     page.click("text='Create'")
     error_message = page.locator("body")
     expect(error_message).to_have_text("Email is already in use")
+    
+    
+def test_password_invalid(db_connection, page, test_web_address):
+    db_connection.seed("seeds/chitter.sql")
+    page.goto(f"http://{test_web_address}/")
+    page.click("text='Sign Up'")
+    page.fill("input[name=name]", "another")
+    page.fill("input[name=username]", "anothertest")
+    page.fill("input[name=email]", "lovejoy@gmail.com")
+    page.fill("input[name=password]", "Test")
+    page.click("text='Create'")
+    error_message = page.locator("body")
+    expect(error_message).to_have_text("Password must have at least 1 capital letter, 1 number, and be greater than 4 in length")
