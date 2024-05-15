@@ -41,7 +41,7 @@ DB_PASSWORD="<your password"
 
 # Run the app
 (html-application-starter-venv); python app.py
-# Now visit http://localhost:5001/emoji in your browser
+# Now visit http://localhost:5001/
 ```
 
 
