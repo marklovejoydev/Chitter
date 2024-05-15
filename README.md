@@ -28,7 +28,7 @@
 
 # add .env
 DB_USERNAME="postgres"
-DB_PASSWORD="<your password"
+DB_PASSWORD="<your password>"
 
 # Open lib/database_connection.py and change the database name to YOUR_PROJECT_NAME
 (html-application-starter-venv); open lib/database_connection.py
