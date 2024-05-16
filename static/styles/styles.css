@@ -108,6 +108,9 @@ input[type="password"] {
   padding: 10px;
   background-color: none;
 }
+.nav-text {
+  margin-right: 50px;
+}
 
 .logo-container {
   margin-right: auto;

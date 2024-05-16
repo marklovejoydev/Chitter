@@ -21,13 +21,13 @@
       </div>
       <div class="buttons-container">
         {% if session.user_id %}
-        <p>Welcome {{user.username}}</p>
+        <p class="nav-text">Welcome {{user.username}}</p>
         <button id="createButton" class="create-button">Create</button>
         <form action="/logout" method="post">
           <button type="submit" class="logout-button">Logout</button>
         </form>
         {% else %}
-        <p>Log in to Peep</p>
+        <p class="nav-text">Log in to Peep</p>
         <form action="/sign-in" method="get">
           <button type="submit" class="login-button">Log In</button>
         </form>

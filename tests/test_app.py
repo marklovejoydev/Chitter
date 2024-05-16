@@ -8,8 +8,8 @@ def test_user_can_log_in(db_connection, page, test_web_address):
     page.click("text='Log In'")
     
     # change to username when implemented
-    div_element = page.locator("img")
-    expect(div_element).to_have_id("Home")
+    div_element = page.locator("p.nav-text")
+    expect(div_element).to_have_text("Welcome lovejoy01")
     
 def test_user_can_create_account_and_log_in(db_connection, page, test_web_address):
     db_connection.seed("seeds/chitter.sql")
@@ -25,8 +25,8 @@ def test_user_can_create_account_and_log_in(db_connection, page, test_web_addres
     page.click("text='Log In'")
     
     # change to username when implemented
-    div_element = page.locator("img")
-    expect(div_element).to_have_id("Home")
+    div_element = page.locator("p.nav-text")
+    expect(div_element).to_have_text("Welcome anothertest")
     
     
 def test_user_can_not_create_account_and_log_in_email_in_use(db_connection, page, test_web_address):

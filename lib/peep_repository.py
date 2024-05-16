@@ -11,6 +11,7 @@ class PeepRepository:
                 SELECT peeps.id, peeps.title, peeps.content, to_char(peeps.time, 'HH24:MI') AS time, peeps.user_id, users.name, users.username
                 FROM peeps
                 JOIN users ON peeps.user_id = users.id
+                ORDER BY peeps.time DESC
                 """
         rows = self.connection.execute(query)
         print(rows[0].keys())
