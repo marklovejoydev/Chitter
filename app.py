@@ -16,7 +16,12 @@ def get_home():
     connection = get_flask_database_connection(app)
     repository = PeepRepository(connection)
     peeps = repository.all()
-    return render_template('chitter/home.html', peeps=peeps)
+    user = None
+    if 'user_id' in session:
+        user_repository = UserRepository(connection)
+        user = user_repository.get_by_id(session['user_id'])
+    
+    return render_template('chitter/home.html', peeps=peeps, user=user)
 
 @app.route('/create')
 def create_form():
@@ -27,18 +32,14 @@ def create_peep():
     connection = get_flask_database_connection(app)
     repository = PeepRepository(connection)
     
-    # Assuming you have a form with fields 'title' and 'content'
     title = request.form['title']
     content = request.form['content']
-    
-    # Get the user_id from the session
     user_id = session.get('user_id')
     time = datetime.now().strftime('%H:%M')
-    # Create a new peep
+    
     peep = Peep(id=user_id, title=title, content=content, time=time, user_id=user_id)
     repository.create(peep)
     
-    # Redirect to the home page after creating the peep
     return redirect('/')
 
 

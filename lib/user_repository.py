@@ -28,3 +28,11 @@ class UserRepository:
         for row in rows:
             return User(row["id"], row["name"], row["username"], row["email"], row["password"])
         return None
+    
+    def get_by_id(self, user_id):
+        rows = self.connection.execute(
+            "SELECT * FROM users WHERE id = %s", [user_id]
+        )
+        for row in rows:
+            return User(row["id"], row["name"], row["username"], row["email"], row["password"])
+        return None
