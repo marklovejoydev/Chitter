@@ -1,9 +1,11 @@
-/* styles.css */
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family: "Poetsen One";
 }
 
 body {
@@ -11,8 +13,14 @@ body {
   background-image: url("../assets/chitter-bg.jpeg");
   background-size: cover;
 }
-
+textarea {
+  padding: 5px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}
 input[type="text"],
+input[type="textarea"],
 input[type="email"],
 input[type="password"] {
   border-radius: 30px;
@@ -28,11 +36,13 @@ input[type="password"] {
 
 .center {
   text-align: center;
+  width: 40vw;
+  margin: 0 auto;
 }
 
 .form-center {
   text-align: center;
-  width: 300px; /* Set a fixed width for the form */
+  width: 300px;
 }
 
 .form-group {
@@ -40,12 +50,40 @@ input[type="password"] {
 }
 
 .form-group label {
-  display: block; /* Ensure labels are displayed as block elements */
+  display: block;
 }
 
 .form-group input {
-  width: 100%; /* Make the input boxes fill the width of the form */
-  padding: 5px; /* Add some padding for better appearance */
+  width: 100%;
+  padding: 5px;
+}
+.create-button-auth {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-button-auth:hover {
+  background-color: #0056b3;
+}
+.login-button-auth {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button-auth:hover {
+  background-color: #0056b3;
 }
 
 .button-link button {
@@ -62,94 +100,78 @@ input[type="password"] {
 .button-link button:hover {
   background-color: #0056b3;
 }
-/* Top navigation bar */
+
 .top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: none; /* Light gray background */
+  background-color: none;
 }
 
-/* Logo container */
 .logo-container {
-  margin-right: auto; /* Pushes the logo to the left */
+  margin-right: auto;
 }
 
-/* Buttons container */
 .buttons-container {
   display: flex;
   align-items: center;
 }
 
-/* Logout button */
 .logout-button {
-  margin-right: 30px; /* Add some space between buttons */
+  margin-right: 30px;
   height: 50px;
+  background-color: #007bff;
+  color: #fff;
   width: auto;
   border-radius: 15px;
   font-size: 16px;
+  font-weight: 600;
 }
 
-/* Create button */
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
 .create-button {
-  margin-right: 10px; /* Add some space between buttons */
+  margin-right: 10px;
   height: 50px;
   width: auto;
+  background-color: #95c1f1;
+  color: #3b3a3a;
+  font-weight: 600;
   border-radius: 15px;
   font-size: 16px;
 }
 
-/* Login button */
 .login-button {
-  margin-right: 30px; /* Add some space between buttons */
+  margin-right: 30px;
   height: 50px;
+  background-color: #007bff;
+  color: #fff;
   width: auto;
   border-radius: 15px;
   font-size: 16px;
+  font-weight: 600;
+}
+.login-button:hover {
+  background-color: #0056b3;
 }
 
-/* Style the list items */
 .peep-item {
-  border: 1px solid lightblue; /* Add border */
-  background-color: #effbff; /* Light blue background color */
+  border: 1px solid lightblue;
+  background-color: #effbff;
   border-radius: 30px;
-  margin: 50px 30px; /* Add margin between list items */
-  padding: 10px; /* Add padding */
+  margin: 50px 30px;
+  padding: 10px;
 }
-/* Center align the h1 and h2 at the top */
+
 .peep-title,
 .peep-subtitle {
   text-align: center;
 }
 
-/* Style the li elements */
 .peep-list {
   list-style-type: none;
   padding: 0;
-}
-
-/* Additional styling for specific elements */
-.peep-item-title {
-  /* Add styles for the title */
-}
-
-.peep-item-content {
-  /* Add styles for the content */
-}
-
-.peep-item-author {
-  /* Add styles for the author */
-}
-
-.peep-item-time {
-  /* Add styles for the time */
-}
-
-.peep-create-button {
-  /* Add styles for the create button */
-}
-
-.peep-login-button {
-  /* Add styles for the login button */
 }
