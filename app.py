@@ -1,27 +1,57 @@
 import os
 import re
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, session
 from lib.database_connection import get_flask_database_connection
 from lib.user_repository import UserRepository
 from lib.user import User
-# Create a new Flask app
-app = Flask(__name__)
+from lib.peep_repository import PeepRepository
+from lib.peep import Peep
+from datetime import datetime
 
+app = Flask(__name__)
+app.secret_key = "enigma"
 
 @app.route('/')
-def get_index():
-    return render_template('chitter/index.html')
+def get_home():
+    connection = get_flask_database_connection(app)
+    repository = PeepRepository(connection)
+    peeps = repository.all()
+    return render_template('chitter/home.html', peeps=peeps)
+
+@app.route('/create')
+def create_form():
+    return render_template('chitter/new_peep.html')
+
+@app.route('/create', methods=['POST'])
+def create_peep():
+    connection = get_flask_database_connection(app)
+    repository = PeepRepository(connection)
+    
+    # Assuming you have a form with fields 'title' and 'content'
+    title = request.form['title']
+    content = request.form['content']
+    
+    # Get the user_id from the session
+    user_id = session.get('user_id')
+    time = datetime.now().strftime('%H:%M')
+    # Create a new peep
+    peep = Peep(id=user_id, title=title, content=content, time=time, user_id=user_id)
+    repository.create(peep)
+    
+    # Redirect to the home page after creating the peep
+    return redirect('/')
+
 
 @app.route('/sign-up')
 def get_signup():
     return render_template('chitter/sign-up.html')
 
-@app.route('/home')
-def home():
-    return render_template('chitter/home.html')
+@app.route('/sign-in')
+def sign_in():
+    return render_template('chitter/index.html')
 
 @app.route('/sign-up', methods=['POST'])
-def post_artist():
+def post_signup():
     if has_invalid_user_parameters(request.form):
         return "You need to submit a name, username, email and password", 400
     connection = get_flask_database_connection(app)
@@ -42,7 +72,7 @@ def post_artist():
                 request.form["email"],
                 request.form["password"])
     repository.create(user)
-    return redirect(f"/")
+    return redirect(f"/sign-in")
 
 def has_invalid_user_parameters(form):
     return 'name' not in request.form or 'username' not in request.form or 'email' not in request.form or 'password' not in request.form 
@@ -61,15 +91,13 @@ def login():
     user = repository.get_by_email(email)
 
     if user and user.password == password:
-        # Login successful, redirect user to a dashboard or profile page
-        return redirect('/home')
+        session['user_id'] = user.id
+        return redirect('/')
     else:
-        # Login failed, return an error message
         return "Invalid email or password", 401
 
 
 def is_valid_password(password):
-    # Password must have at least 1 capital letter, 1 number, and be greater than 4 in length
     if len(password) < 5:
         return False
     if not re.search("[A-Z]", password):
@@ -77,6 +105,11 @@ def is_valid_password(password):
     if not re.search("[0-9]", password):
         return False
     return True
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect('/')
 
 
 if __name__ == '__main__':

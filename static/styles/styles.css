@@ -1,4 +1,23 @@
 /* styles.css */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: fixed;
+  background-image: url("../assets/chitter-bg.jpeg");
+  background-size: cover;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border-radius: 30px;
+  text-align: center;
+}
 .container {
   display: flex;
   flex-direction: column;
@@ -42,4 +61,95 @@
 
 .button-link button:hover {
   background-color: #0056b3;
+}
+/* Top navigation bar */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: none; /* Light gray background */
+}
+
+/* Logo container */
+.logo-container {
+  margin-right: auto; /* Pushes the logo to the left */
+}
+
+/* Buttons container */
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Logout button */
+.logout-button {
+  margin-right: 30px; /* Add some space between buttons */
+  height: 50px;
+  width: auto;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+/* Create button */
+.create-button {
+  margin-right: 10px; /* Add some space between buttons */
+  height: 50px;
+  width: auto;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+/* Login button */
+.login-button {
+  margin-right: 30px; /* Add some space between buttons */
+  height: 50px;
+  width: auto;
+  border-radius: 15px;
+  font-size: 16px;
+}
+
+/* Style the list items */
+.peep-item {
+  border: 1px solid lightblue; /* Add border */
+  background-color: #effbff; /* Light blue background color */
+  border-radius: 30px;
+  margin: 50px 30px; /* Add margin between list items */
+  padding: 10px; /* Add padding */
+}
+/* Center align the h1 and h2 at the top */
+.peep-title,
+.peep-subtitle {
+  text-align: center;
+}
+
+/* Style the li elements */
+.peep-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Additional styling for specific elements */
+.peep-item-title {
+  /* Add styles for the title */
+}
+
+.peep-item-content {
+  /* Add styles for the content */
+}
+
+.peep-item-author {
+  /* Add styles for the author */
+}
+
+.peep-item-time {
+  /* Add styles for the time */
+}
+
+.peep-create-button {
+  /* Add styles for the create button */
+}
+
+.peep-login-button {
+  /* Add styles for the login button */
 }

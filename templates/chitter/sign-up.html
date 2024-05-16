@@ -8,8 +8,13 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="center">CHITTER</h1>
-      <h2 class="center">Sign Up</h2>
+      <a href="/"
+        ><img
+          src="../../static/assets/chitter-logo-black.svg"
+          alt="Chitter Logo"
+          width="200px"
+          height="200px"
+      /></a>
 
       <form class="form-center" action="/sign-up" method="POST">
         <div class="form-group">
@@ -30,17 +35,17 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input type="password" id="password" name="password" />
-          <span id="password-suggestion" style="color: gray"
+          <span id="password-suggestion" style="color: rgb(37, 37, 37)"
             >Password must contain at least 1 capital letter, 1 number and be at
             least 5 characters long.</span
           >
         </div>
 
-        <button type="submit">Create</button>
+        <button class="button-link" type="submit">Create</button>
       </form>
 
       <div class="center">
-        <a href="/" class="button-link">
+        <a href="/sign-in" class="button-link">
           <button>Log In</button>
         </a>
       </div>

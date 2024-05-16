@@ -4,8 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <!-- Link to your CSS file -->
   </head>
   <body>
-    <h1>HOME</h1>
+    <nav class="top-nav">
+      <div class="logo-container">
+        <a href="/">
+          <img
+            src="../../static/assets/chitter-logo-black.svg"
+            alt="Chitter Logo"
+            width="200px"
+            height="200px"
+          />
+        </a>
+      </div>
+      <div class="buttons-container">
+        {% if session.user_id %}
+        <!-- Show the "Logout" button if a user is logged in -->
+        <button id="createButton" class="create-button">Create</button>
+        <form action="/logout" method="post">
+          <button type="submit" class="logout-button">Logout</button>
+        </form>
+        <!-- Show the "Create" button if a user is logged in -->
+        {% else %}
+        <!-- Show the "Log In" button if no user is logged in -->
+        <form action="/sign-in" method="get">
+          <button type="submit" class="login-button">Log In</button>
+        </form>
+        {% endif %}
+      </div>
+    </nav>
+
+    <ul class="peep-list">
+      {% for peep in peeps %}
+      <li class="peep-item">
+        <h2 class="peep-item-title">{{ peep.title }}</h2>
+        <p class="peep-item-content">{{ peep.content }}</p>
+        <p class="peep-item-author">
+          Created By: {{ peep.name }} - {{ peep.username }}
+        </p>
+        <p class="peep-item-time">{{ peep.time }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <script>
+      // Event listener for create route
+      document
+        .getElementById("createButton")
+        .addEventListener("click", function () {
+          window.location.href = "/create";
+        });
+    </script>
   </body>
 </html>
