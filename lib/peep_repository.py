@@ -14,7 +14,6 @@ class PeepRepository:
                 ORDER BY peeps.time DESC
                 """
         rows = self.connection.execute(query)
-        print(rows[0].keys())
             
         return [
             Peep(row["id"], row["title"], row["content"], row["time"], row["user_id"], row["name"], row["username"])

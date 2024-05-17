@@ -7,6 +7,7 @@ from lib.user import User
 from lib.peep_repository import PeepRepository
 from lib.peep import Peep
 from datetime import datetime
+import bcrypt
 
 app = Flask(__name__)
 app.secret_key = "enigma"
@@ -66,12 +67,17 @@ def post_signup():
     if not is_valid_password(password):
         return "Password must have at least 1 capital letter, 1 number, and be greater than 4 in length", 400
     
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hashed_password_str = hashed_password.decode('utf-8')  # Store the hash as a string
+    print(f"Hashed password: {hashed_password_str}")  # Debugging line
+    
     user = User(
-                None,
-                request.form["name"],
-                request.form["username"],
-                request.form["email"],
-                request.form["password"])
+        None,
+        request.form["name"],
+        request.form["username"],
+        request.form["email"],
+        hashed_password_str
+    )
     repository.create(user)
     return redirect(f"/sign-in")
 
@@ -90,12 +96,15 @@ def login():
     repository = UserRepository(connection)
 
     user = repository.get_by_email(email)
-
-    if user and user.password == password:
-        session['user_id'] = user.id
-        return redirect('/')
-    else:
-        return "Invalid email or password", 401
+    
+    if user:
+        stored_password_hash = user.password
+        print(f"Stored password hash: {stored_password_hash}")  # Debugging line
+        if bcrypt.checkpw(password.encode('utf-8'), stored_password_hash.encode('utf-8')):
+            session['user_id'] = user.id
+            return redirect('/')
+    
+    return "Invalid email or password", 401
 
 
 def is_valid_password(password):
