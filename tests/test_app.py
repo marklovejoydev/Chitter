@@ -15,6 +15,8 @@ def test_user_can_create_account_and_log_in(db_connection, page, test_web_addres
     div_element = page.locator("p.nav-text")
     expect(div_element).to_have_text("Welcome anothertest")
     
+    #as the tests develope what is the best way to handle older tests as return gvalues or expected values can change
+    
     
 def test_user_can_not_create_account_and_log_in_email_in_use(db_connection, page, test_web_address):
     db_connection.seed("seeds/chitter.sql")
@@ -50,7 +52,23 @@ def test_password_invalid(db_connection, page, test_web_address):
     
     
 #test for create peep
-
-#test for homepage no log in 
-
-#test correct user logged in 
+def test_create_peep(db_connection, page, test_web_address):
+    db_connection.seed("seeds/chitter.sql")
+    page.goto(f"http://{test_web_address}/sign-in")
+    page.click("text='Sign Up'")
+    page.fill("input[name=name]", "another")
+    page.fill("input[name=username]", "anothertest")
+    page.fill("input[name=email]", "another@gmail.com")
+    page.fill("input[name=password]", "Test123")
+    page.click("text='Create'")
+    page.fill("input[name=email]", "another@gmail.com")
+    page.fill("input[name=password]", "Test123")
+    page.click("text='Log In'")
+    page.click("text=Create")
+    page.fill("input[name=title]", "some title")
+    page.fill("textarea[name=content]", "some content")
+    page.click("text=Submit")
+    new_peep = page.locator("li.peep-item:has(h2:has-text('some title'))")
+    expect(new_peep).to_be_visible()
+    expect(new_peep.locator("h2.peep-item-title")).to_have_text("some title")
+    expect(new_peep.locator("p.peep-item-content")).to_have_text("some content")

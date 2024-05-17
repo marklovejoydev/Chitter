@@ -68,7 +68,7 @@ def post_signup():
         return "Password must have at least 1 capital letter, 1 number, and be greater than 4 in length", 400
     
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-    hashed_password_str = hashed_password.decode('utf-8')  # Store the hash as a string
+    hashed_password_str = hashed_password.decode('utf-8')
     
     user = User(
         None,
