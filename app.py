@@ -69,7 +69,6 @@ def post_signup():
     
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     hashed_password_str = hashed_password.decode('utf-8')  # Store the hash as a string
-    print(f"Hashed password: {hashed_password_str}")  # Debugging line
     
     user = User(
         None,
@@ -99,7 +98,6 @@ def login():
     
     if user:
         stored_password_hash = user.password
-        print(f"Stored password hash: {stored_password_hash}")  # Debugging line
         if bcrypt.checkpw(password.encode('utf-8'), stored_password_hash.encode('utf-8')):
             session['user_id'] = user.id
             return redirect('/')
