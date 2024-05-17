@@ -5,14 +5,88 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Poetsen One";
+  font-family: "Poetsen One", sans-serif;
 }
 
 body {
+  margin: auto;
+  overflow: auto;
+  background: linear-gradient(
+    315deg,
+    rgba(101, 0, 94, 1) 3%,
+    rgba(60, 132, 206, 1) 38%,
+    rgba(48, 238, 226, 1) 68%,
+    rgba(255, 25, 25, 1) 98%
+  );
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.wave {
+  background: rgb(255 255 255 / 25%);
+  border-radius: 1000% 1000% 0 0;
+  position: fixed;
+  width: 200%;
+  height: 12em;
+  animation: wave 10s -3s linear infinite;
+  transform: translate3d(0, 0, 0);
+  opacity: 0.8;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+  bottom: -1.25em;
+  animation: wave 18s linear reverse infinite;
+  opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+  bottom: -2.5em;
+  animation: wave 20s -1s reverse infinite;
+  opacity: 0.9;
+}
+
+@keyframes wave {
+  2% {
+    transform: translateX(1);
+  }
+
+  25% {
+    transform: translateX(-25%);
+  }
+
+  50% {
+    transform: translateX(-50%);
+  }
+
+  75% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(1);
+  }
+}
+/* body {
   background: fixed;
   background-image: url("../assets/chitter-bg.jpeg");
   background-size: cover;
-}
+} */
 textarea {
   padding: 5px;
   border-radius: 10px;
@@ -31,7 +105,7 @@ input[type="password"] {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 60vh;
 }
 
 .center {
@@ -51,17 +125,30 @@ input[type="password"] {
 
 .form-group label {
   display: block;
+  font-size: 26px;
+  color: white;
+  text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+    3px 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000, 0 -3px 0 #000, 0 3px 0 #000,
+    -3px -1px 0 #000, 3px -1px 0 #000, -3px 1px 0 #000, 3px 1px 0 #000,
+    -1px -3px 0 #000, 1px -3px 0 #000, -1px 3px 0 #000, 1px 3px 0 #000;
 }
 
 .form-group input {
   width: 100%;
   padding: 5px;
 }
+.peep-title {
+  color: white;
+  text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+    3px 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000, 0 -3px 0 #000, 0 3px 0 #000,
+    -3px -1px 0 #000, 3px -1px 0 #000, -3px 1px 0 #000, 3px 1px 0 #000,
+    -1px -3px 0 #000, 1px -3px 0 #000, -1px 3px 0 #000, 1px 3px 0 #000;
+}
 .create-button-auth {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: oldlace;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -69,13 +156,14 @@ input[type="password"] {
 }
 
 .create-button-auth:hover {
-  background-color: #0056b3;
+  background-color: #ffffff4f;
+  color: #000;
 }
 .login-button-auth {
   margin-top: 10px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: oldlace;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -83,14 +171,15 @@ input[type="password"] {
 }
 
 .login-button-auth:hover {
-  background-color: #0056b3;
+  background-color: #ffffff4f;
+  color: #000;
 }
 
 .button-link button {
   margin-top: 30px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: oldlace;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -98,7 +187,8 @@ input[type="password"] {
 }
 
 .button-link button:hover {
-  background-color: #0056b3;
+  background-color: #ffffff4f;
+  color: #000;
 }
 
 .top-nav {
@@ -110,6 +200,10 @@ input[type="password"] {
 }
 .nav-text {
   margin-right: 50px;
+  color: rgb(255, 255, 255);
+  font-size: 45px;
+  text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+    3px 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000, 0 -3px 0 #000, 0 3px 0 #000;
 }
 
 .logo-container {
@@ -124,8 +218,8 @@ input[type="password"] {
 .logout-button {
   margin-right: 30px;
   height: 50px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: oldlace;
+  color: #000000;
   width: auto;
   border-radius: 15px;
   font-size: 16px;
@@ -133,32 +227,38 @@ input[type="password"] {
 }
 
 .logout-button:hover {
-  background-color: #0056b3;
+  background-color: #ffffff4f;
+  color: #000;
 }
 
 .create-button {
   margin-right: 10px;
   height: 50px;
   width: auto;
-  background-color: #95c1f1;
-  color: #3b3a3a;
+  background-color: oldlace;
+  color: #000000;
   font-weight: 600;
   border-radius: 15px;
   font-size: 16px;
+}
+.create-button:hover {
+  background-color: #ffffff4f;
+  color: #000;
 }
 
 .login-button {
   margin-right: 30px;
   height: 50px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: oldlace;
+  color: #000000;
   width: auto;
   border-radius: 15px;
   font-size: 16px;
   font-weight: 600;
 }
 .login-button:hover {
-  background-color: #0056b3;
+  background-color: #ffffff4f;
+  color: #000;
 }
 
 .peep-item {
